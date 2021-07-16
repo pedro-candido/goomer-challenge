@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 
 export const Header = styled.header`
-    min-height: 62px;
+    max-height: 62px;
     background-color: #009CA3;
+
+    @media(min-width: 992px) {
+        height: 62px;
+    }
 `
