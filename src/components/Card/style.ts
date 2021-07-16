@@ -3,7 +3,8 @@ import styles from 'styled-components'
 export const CardContainer = styles.div`
     @media(min-width: 992px){
         max-height: 100px;
-        max-width:367px;
+        width: 30%;
+        max-width: 365px;
         display: flex;
         flex-direction: row;
         margin-top: 5%;
@@ -11,6 +12,13 @@ export const CardContainer = styles.div`
         border-radius: 4px;
         box-shadow: 0 2px 4px #00000029;
         position: relative;
+        transition: .4s transform;
+
+        &:hover {
+            transform: scale(1.05);
+            transition: .4s transform;
+            cursor: pointer;
+        }
     }
 `
 
@@ -36,7 +44,8 @@ export const CardImage = styles.div`
     }
 `
 
-export const Disponibility = styles.div`
+export const Disponibility = styles.div<{isOpen: boolean}>`
+    background-color: ${({isOpen}) => isOpen ? '#2B0D61' : '#B5ABD4'};
     font-size: 8px;
     min-width: 38px;
     min-height: 38px;
@@ -44,7 +53,6 @@ export const Disponibility = styles.div`
     font-weight: bold;
     color: #fff;
     border-radius: 100%;
-    background-color: red;
     position: absolute;
     right: -2%;
     top: -15%;

@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
-import axios from 'axios'
+
+import { Input, InputWrapper, SearchIcon } from './style'
 
 export const Searchbar = () =>{
     const [ restaurant, setRestaurant ] = useState('')
-    const [ restaurants, setRestaurants ] = useState([])
 
     const handlePress = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
@@ -11,18 +11,16 @@ export const Searchbar = () =>{
     }
 
     return (
-        <>
-            <ul>
-                { restaurants.map((item: any) =>{
-
-                })}
-            </ul>
-            <input 
+        <InputWrapper>
+            <Input 
                 type="text" 
                 name="restaurant" 
                 onChange={(event) => handlePress(event)}
                 value={restaurant}
+                placeholder={`Buscar estabelecimento`}
+                autoComplete={`off`}
             />
-        </>
+            <SearchIcon />
+        </InputWrapper>
     )
 }
