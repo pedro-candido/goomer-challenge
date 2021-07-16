@@ -3,11 +3,11 @@ import axios from 'axios';
 import { Card } from '../'
 import { RestaurantsContainer } from './style'
 
-interface RestaurantProps {
-    id:number,
-    name:string,
-    address:string,
-    image:string,
+interface IRestaurant {
+    id: number,
+    name: string,
+    address: string,
+    image: string,
     hours?: [
         {
             from: string;
@@ -17,28 +17,47 @@ interface RestaurantProps {
     ]
 }
 
-export const Restaurants = () =>{
+interface IDisponibility {
+    hours?: [
+        from?: string,
+        to?: string,
+        days?: [number]
+    ]
+}
 
-    const [ restaurants, setRestaurants ] = useState([])
+export const Restaurants = () => {
+    const [restaurants, setRestaurants] = useState([])
+    let isOpen = false;
 
-    const getRestaurants = async () =>{
+    const getRestaurants = async () => {
         const { data } = await axios.get('http://challange.goomer.com.br/restaurants')
         setRestaurants(data)
     }
 
-    useEffect(()=>{
+    const compareTime = (hours: IDisponibility) => {
+        let timeNow: Date = new Date();
+        let today = timeNow.getDay();
+        if (hours) {
+            console.log(hours)
+        }
+    }
+
+    useEffect(() => {
         getRestaurants();
     }, [])
 
-    return(
+    return (
         <RestaurantsContainer>
-            {restaurants.map((item: RestaurantProps, index: number) => {
+            {restaurants.map((item: IRestaurant, index: number) => {
+                if(item.hours) compareTime(item.hours);
                 return (
                     <div key={index}>
                         <Card
                             logo={item.image}
                             name={item.name}
                             address={item.address}
+                            id={item.id}
+                            isRestaurantOpen={isOpen}
                         />
                     </div>
                 )

@@ -20,6 +20,12 @@ export const CardData = styles.div`
         flex-direction: column;
         padding: 20px;
         width: 267px;
+        h2{
+            font-size: 16px;
+        }
+        p {
+            font-size: 12px;
+        }
     }
 `
 
@@ -31,11 +37,19 @@ export const CardImage = styles.div`
 `
 
 export const Disponibility = styles.div`
-    min-width: 48px;
-    min-height: 48px;
+    font-size: 8px;
+    min-width: 38px;
+    min-height: 38px;
+    padding: 5px;
+    font-weight: bold;
+    color: #fff;
     border-radius: 100%;
     background-color: red;
     position: absolute;
-    right: -5%;
+    right: -2%;
     top: -15%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 `
