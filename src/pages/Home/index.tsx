@@ -5,8 +5,9 @@ const Home = () => {
         <>
             <Header />,
             <Title text="Bem-vindo ao Lista Rango" />
-            <Searchbar />
-
+            <Searchbar
+                placeholder={`Buscar estabelecimento`}
+            />
             <Restaurants />
         </>
     )

@@ -2,7 +2,11 @@ import { useState, useEffect } from 'react'
 
 import { Input, InputWrapper, SearchIcon } from './style'
 
-export const Searchbar = () =>{
+interface ISearch {
+    placeholder: string;
+}
+
+export const Searchbar = ({placeholder}: ISearch) =>{
     const [ restaurant, setRestaurant ] = useState('')
 
     const handlePress = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +21,7 @@ export const Searchbar = () =>{
                 name="restaurant" 
                 onChange={(event) => handlePress(event)}
                 value={restaurant}
-                placeholder={`Buscar estabelecimento`}
+                placeholder={placeholder}
                 autoComplete={`off`}
             />
             <SearchIcon />
