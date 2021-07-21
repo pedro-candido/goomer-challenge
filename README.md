@@ -6,6 +6,9 @@
     <img alt="redux" src="https://img.shields.io/badge/-Redux-764ABC?style=flat-square&logo=redux&logoColor=white" />
   </a>
   <img alt="Styled Components" src="https://img.shields.io/badge/-Styled_Components-db7092?style=flat-square&logo=styled-components&logoColor=white" />
+</p>
+
+<p align="center">
   <img src="https://i.imgur.com/PEOn46y.png" alt="Logo ConvertApp" width="200"/>
 </p>
 
