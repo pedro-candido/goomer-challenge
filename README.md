@@ -1,4 +1,3 @@
-# Goomer Challenge
 <p align="center">
   <img alt="React" src="https://img.shields.io/badge/-React-45b8d8?style=flat-square&logo=react&logoColor=white" />
   <img alt="TypeScript" src="https://img.shields.io/badge/-TypeScript-007ACC?style=flat-square&logo=typescript&logoColor=white" />
@@ -7,6 +6,8 @@
   </a>
   <img alt="Styled Components" src="https://img.shields.io/badge/-Styled_Components-db7092?style=flat-square&logo=styled-components&logoColor=white" />
 </p>
+
+# Goomer Challenge
 
 <p align="center">
   <img src="https://i.imgur.com/PEOn46y.png" alt="Logo ConvertApp" width="200"/>
