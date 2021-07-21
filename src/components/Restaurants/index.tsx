@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
 import { Card } from '../'
 import { RestaurantsContainer } from './style'
@@ -21,6 +22,7 @@ export const Restaurants = () => {
     const { data } = useSelector((state: RootState) => state.SearchReducer);
     const [ restaurants, setRestaurants ] = useState<IRestaurant[]>([]);
     const [ restaurantsToRender, setRestaurantsToRender ] = useState<IRestaurant[]>([]);
+    const history = useHistory();
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -32,12 +34,19 @@ export const Restaurants = () => {
     }, [data])
 
     useEffect(()=> {
+        const compareStrings = (firstString: string, secondString: string) =>{
+            const firstStringCapitalized = firstString.toLowerCase();
+            const secondStringCapitalized = secondString.toLowerCase();
+
+            return firstStringCapitalized.includes(secondStringCapitalized);
+        }
+
         const handleInputChange = () => {
             if (SearchReducer.value === '') {
                 setRestaurantsToRender(restaurants)
                 console.log(SearchReducer.value)
             } else {
-                const filteredRestaurants = restaurants.filter(newItem => newItem.name.toLowerCase().includes(SearchReducer.value) === true)
+                const filteredRestaurants = restaurants.filter(newItem => compareStrings(newItem.name, SearchReducer.value) === true)
                 setRestaurantsToRender(filteredRestaurants)
             }
         }
@@ -45,11 +54,17 @@ export const Restaurants = () => {
         handleInputChange();
     },[SearchReducer.value, restaurants])
 
+    const handleClick = () => {
+        console.log('Chamei')
+        history.push('/restaurants')
+    }
+
     return (
         <RestaurantsContainer>
             {restaurantsToRender.map((item, index: number) => {
                 return (
                         <Card
+                            onClick={handleClick}
                             key={index}
                             restaurant={item}
                         />

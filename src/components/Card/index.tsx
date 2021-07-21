@@ -10,6 +10,7 @@ export interface ICard {
         address: string;
         hours?: Array<IHours>
     }
+    [x: string]: any
 }
 
 export interface IHours {
@@ -18,7 +19,7 @@ export interface IHours {
     days: number[];
 }
 
-export const Card = ({ restaurant }: ICard) => {
+export const Card = ({ restaurant, ...rest }: ICard) => {
     const [isOpen, setIsOpen] = useState(false);
     const cardMemoized = useMemo(() => <CardImage style={{ background: `url(${restaurant.image}) 0% 0% round padding-box` }} />, [restaurant])
     const [timeNow, setTimeNow] = useState({
@@ -55,7 +56,7 @@ export const Card = ({ restaurant }: ICard) => {
     }, [timeNow, restaurant.hours])
 
     return (
-        <CardContainer>
+        <CardContainer {...rest}>
             { cardMemoized }
             <CardData>
                 <h2>{restaurant.name}</h2>
