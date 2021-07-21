@@ -1,16 +1,20 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { updateValue } from '../../reducers/Searchbar.reducer'
 
-import { Input, InputWrapper, SearchIcon } from './style'
+import { Input, InputWrapper, SearchIcon } from './style';
 
 interface ISearch {
     placeholder: string;
 }
 
 export const Searchbar = ({placeholder}: ISearch) =>{
-    const [ restaurant, setRestaurant ] = useState('')
+    const [ restaurant, setRestaurant ] = useState('');
+    const dispatch = useDispatch();
 
     const handlePress = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault();
+        dispatch(updateValue(event.target.value));
         setRestaurant(event.target.value);
     }
 
@@ -19,7 +23,7 @@ export const Searchbar = ({placeholder}: ISearch) =>{
             <Input 
                 type="text" 
                 name="restaurant" 
-                onChange={(event) => handlePress(event)}
+                onChange={handlePress}
                 value={restaurant}
                 placeholder={placeholder}
                 autoComplete={`off`}

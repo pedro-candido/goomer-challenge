@@ -3,7 +3,6 @@ import styles from 'styled-components'
 export const CardContainer = styles.div`
     @media(min-width: 992px){
         max-height: 100px;
-        width: 30%;
         max-width: 365px;
         display: flex;
         flex-direction: row;
@@ -24,9 +23,7 @@ export const CardContainer = styles.div`
 
 export const CardData = styles.div`
     @media(min-width: 992px){
-        display: flex;
-        flex-direction: column;
-        padding: 20px;
+        padding: 15px;
         width: 267px;
         h2{
             font-size: 16px;
@@ -39,6 +36,7 @@ export const CardData = styles.div`
 
 export const CardImage = styles.div`
     @media(min-width: 992px){
+        image-rendering: smooth;
         width: 100px;
         border-radius: 4px 0 0 4px
     }

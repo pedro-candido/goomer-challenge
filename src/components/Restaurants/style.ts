@@ -2,11 +2,13 @@ import styles from 'styled-components'
 
 export const RestaurantsContainer = styles.div`
     @media(min-width: 992px){
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: 31.5% 31.5% 31.5%;
+        grid-template-rows: 80px auto 80px; 
+        column-gap: 30px;
+        row-gap: 15px;
         max-width: 1070px;
         width: 100%;
-        margin: auto;
-        flex-wrap: wrap;
+        margin: 2% auto 2% auto;
     }
 `

@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+
 import { Card } from '../'
 import { RestaurantsContainer } from './style'
-
 import { IHours } from '../Card'
+import { RootState } from '../../store/configureStore.store'
 
-import axios from 'axios';
+import { fetchRestaurants } from '../../reducers/Searchbar.reducer'
+
 interface IRestaurant {
     id: number,
     name: string,
@@ -14,22 +17,40 @@ interface IRestaurant {
 }
 
 export const Restaurants = () => {
-    const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
-
-    const getRestaurants = async () => {
-        const { data } = await axios.get('http://challange.goomer.com.br/restaurants')
-        setRestaurants(data)
-    }
+    const SearchReducer = useSelector((state: RootState) => state.SearchReducer);
+    const { data } = useSelector((state: RootState) => state.SearchReducer);
+    const [ restaurants, setRestaurants ] = useState<IRestaurant[]>([]);
+    const [ restaurantsToRender, setRestaurantsToRender ] = useState<IRestaurant[]>([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        getRestaurants();
-    }, [])
+        fetchRestaurants(dispatch)
+    }, [dispatch])
+
+    useEffect(() => {
+        setRestaurants(data);
+    }, [data])
+
+    useEffect(()=> {
+        const handleInputChange = () => {
+            if (SearchReducer.value === '') {
+                setRestaurantsToRender(restaurants)
+                console.log(SearchReducer.value)
+            } else {
+                const filteredRestaurants = restaurants.filter(newItem => newItem.name.toLowerCase().includes(SearchReducer.value) === true)
+                setRestaurantsToRender(filteredRestaurants)
+            }
+        }
+
+        handleInputChange();
+    },[SearchReducer.value, restaurants])
 
     return (
         <RestaurantsContainer>
-            {restaurants.map((item, index: number) => {
+            {restaurantsToRender.map((item, index: number) => {
                 return (
                         <Card
+                            key={index}
                             restaurant={item}
                         />
                 )
