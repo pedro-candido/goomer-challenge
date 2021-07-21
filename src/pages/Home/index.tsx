@@ -1,4 +1,4 @@
-import { Title, Header, Searchbar, Restaurants } from '../../components'
+import { Title, Searchbar, Restaurants } from '../../components'
 
 export const Home = () => {
     return (

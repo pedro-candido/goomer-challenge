@@ -1,14 +1,14 @@
 import axios from 'axios'
 import { createSlice } from '@reduxjs/toolkit';
+import { Dispatch } from 'redux';
 
 const SearchReducer = createSlice({
     initialState: {
         value: '',
         loading: false,
-        data: [] || null,
+        data: [],
         error: null,
         success: false,
-        isFetchStarted: false
     },
     name: 'searchBar',
     reducers: {
@@ -17,7 +17,6 @@ const SearchReducer = createSlice({
         },
         fetchStarted(state) {
             state.loading = true;
-            state.isFetchStarted = true
         },
         fetchSuccess(state, action) {
             state.loading = false;
@@ -36,7 +35,7 @@ const SearchReducer = createSlice({
 
 const { fetchError, fetchStarted, fetchSuccess } = SearchReducer.actions;
 
-export const fetchRestaurants = async (dispatch: any) =>{
+export const fetchRestaurants = async (dispatch: Dispatch) =>{
     const baseUrl = 'http://challange.goomer.com.br';
 
     try {

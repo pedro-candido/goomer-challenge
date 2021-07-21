@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import { Card } from '../'
 import { RestaurantsContainer } from './style'
 import { IHours } from '../Card'
+
 import { RootState } from '../../store/configureStore.store'
 
 import { fetchRestaurants } from '../../reducers/Searchbar.reducer'
@@ -18,10 +19,13 @@ interface IRestaurant {
 }
 
 export const Restaurants = () => {
-    const SearchReducer = useSelector((state: RootState) => state.SearchReducer);
+    const { SearchReducer } = useSelector((state: RootState) => state);
+    const { value: inputValue  } = SearchReducer
     const { data } = useSelector((state: RootState) => state.SearchReducer);
+
     const [ restaurants, setRestaurants ] = useState<IRestaurant[]>([]);
     const [ restaurantsToRender, setRestaurantsToRender ] = useState<IRestaurant[]>([]);
+
     const history = useHistory();
     const dispatch = useDispatch();
 
@@ -42,30 +46,29 @@ export const Restaurants = () => {
         }
 
         const handleInputChange = () => {
-            if (SearchReducer.value === '') {
+            if (inputValue === '') {
                 setRestaurantsToRender(restaurants)
-                console.log(SearchReducer.value)
             } else {
-                const filteredRestaurants = restaurants.filter(newItem => compareStrings(newItem.name, SearchReducer.value) === true)
+                const filteredRestaurants = restaurants.filter(restaurant => compareStrings(restaurant.name, inputValue) === true)
                 setRestaurantsToRender(filteredRestaurants)
             }
         }
 
         handleInputChange();
-    },[SearchReducer.value, restaurants])
+    },[inputValue, restaurants])
 
-    const handleClick = () => {
-        console.log('Chamei')
+    const handleClick = (index: number) => {
+        // useParams
         history.push('/restaurants')
     }
 
     return (
         <RestaurantsContainer>
-            {restaurantsToRender.map((item, index: number) => {
+            {restaurantsToRender.map((item) => {
                 return (
                         <Card
-                            onClick={handleClick}
-                            key={index}
+                            onClick={() => handleClick(item.id)}
+                            key={item.id}
                             restaurant={item}
                         />
                 )

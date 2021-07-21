@@ -1,8 +1,8 @@
 import { CardContainer, CardData, CardImage, Disponibility } from './style'
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo, HTMLAttributes } from 'react'
 import { getDay, getHours } from 'date-fns'
 
-export interface ICard {
+export interface ICard extends HTMLAttributes<HTMLDivElement>{
     restaurant: {
         id: number;
         image: string;
@@ -10,7 +10,6 @@ export interface ICard {
         address: string;
         hours?: Array<IHours>
     }
-    [x: string]: any
 }
 
 export interface IHours {

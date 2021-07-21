@@ -6,7 +6,7 @@ export const routes = (
         <Route path="/" exact>
             <Home />
         </Route>
-        <Route path="/restaurant" exact>
+        <Route path="/restaurant/:id">
             <Restaurant />
         </Route>
     </Switch>

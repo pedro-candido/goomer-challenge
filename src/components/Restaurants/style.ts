@@ -9,6 +9,6 @@ export const RestaurantsContainer = styles.div`
         row-gap: 15px;
         max-width: 1070px;
         width: 100%;
-        margin: 2% auto 2% auto;
+        margin: 2% auto;
     }
 `

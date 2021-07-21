@@ -33,7 +33,7 @@ export const CardData = styles.div`
         }
     }
 `
-
+// usar img como prop pra poder usar o imageRendering e o usememo
 export const CardImage = styles.div`
     @media(min-width: 992px){
         image-rendering: smooth;

@@ -13,7 +13,7 @@ export const Header = () => {
 
     return(
         <StyledHeader>
-            <GoomerLogo onClick={handleClick} src="https://i.imgur.com/N1PZ8OJ.png" alt="" />
+            <GoomerLogo onClick={handleClick} src="https://i.imgur.com/N1PZ8OJ.png" alt="logo do goomer" />
         </StyledHeader>
     )
 }
