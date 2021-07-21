@@ -20,12 +20,13 @@
 - Este app é um teste técnico para a empresa Goomer, deve ser aplicado conceitos de React, redux e testes ✨🚀
 
 ### 📖 Planejamento
-  - [ ] Estrutura do projeto 
+  - [x] Estrutura do projeto 
   - [x] Implementar styled-components
-  - [ ] Implementar react-router-dom
-  - [ ] Implementar Redux para troca de informações entre páginas
+  - [x] Implementar react-router-dom
+  - [x] Implementar Redux para troca de informações entre páginas
   - [x] Implementar requisições
   - [ ] Implementar storybook
+  - [ ] Implementar testes
 
 ### 💻 Tecnologias utilizadas
 - React
