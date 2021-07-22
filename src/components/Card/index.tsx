@@ -2,23 +2,10 @@ import { CardContainer, CardData, CardImage, Disponibility } from './style'
 import { useState, useEffect, useMemo, HTMLAttributes } from 'react'
 import { getDay, getHours } from 'date-fns'
 
-export interface ICard extends HTMLAttributes<HTMLDivElement>{
-    restaurant: {
-        id: number;
-        image: string;
-        name: string;
-        address: string;
-        hours?: Array<IHours>
-    }
-}
-
-export interface IHours {
-    from: string;
-    to: string;
-    days: number[];
-}
+import { ICard, IHours } from '../../global/types'
 
 export const Card = ({ restaurant, ...rest }: ICard) => {
+    // Tentar inserir prop img e passar no styled components
     const [isOpen, setIsOpen] = useState(false);
     const cardMemoized = useMemo(() => <CardImage style={{ background: `url(${restaurant.image}) 0% 0% round padding-box` }} />, [restaurant])
     const [timeNow, setTimeNow] = useState({
@@ -34,23 +21,24 @@ export const Card = ({ restaurant, ...rest }: ICard) => {
     }, 10000)
 
     useEffect(() => {
-        const compareTime = (hours: Array<IHours>) => {
+        const compareTime = (hours: Array<IHours>) => {            
             !hours && setIsOpen(false);
-    
-            hours.map(({ days, from, to }) => {
+            let tmp = hours.map(({ days, from, to }) => {
                 let openHour = Number(from.split(':')[0]);
                 let closeHour = Number(to.split(':')[0]);
                 if (days.includes(timeNow.day) && timeNow.hour >= openHour && timeNow.hour < closeHour) {
-                    return setIsOpen(true);
+                    return true;
                 }
                 if (openHour > closeHour && days.includes(timeNow.day - 1)) {
-                    if (timeNow.hour > openHour || timeNow.hour < closeHour)
-                        return setIsOpen(true);
+                    if (timeNow.hour >= openHour || timeNow.hour < closeHour){
+                        return true;
+                    }
                 }
-                return setIsOpen(false);
+                return false;
             });
-        }
 
+            return tmp
+        }
         restaurant.hours && compareTime(restaurant.hours)
     }, [timeNow, restaurant.hours])
 

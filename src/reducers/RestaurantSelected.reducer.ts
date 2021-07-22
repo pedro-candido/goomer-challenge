@@ -1,16 +1,47 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit';
+import { Dispatch } from 'redux';
+
+import { IRestaurant } from '../global/types'
+
+import api from '../api';
+
 
 const RestaurantSelected = createSlice({
     initialState: {
-        restaurantName: '',
+        restaurantSelected: '',
+        loading: false,
+        data: {} as IRestaurant | {},
+        error: null
     },
     name: 'restaurantSelected',
     reducers: {
-        setRestaurantName(state, action) {
-            state.restaurantName = action.payload;
+        fetchStarted(state){
+            state.data = {};
+            state.loading = true;
+        },
+        fetchSuccess(state, action){
+            state.loading = false;
+            state.data = action.payload;
+            state.error = null;
+        },
+        fetchError(state, action){
+            state.loading = false;
+            state.data = {};
+            state.error = action.payload;
         }
     }
 })
 
-export const { setRestaurantName } = RestaurantSelected.actions;
+const { fetchStarted, fetchSuccess, fetchError } = RestaurantSelected.actions;
+
+export const fetchRestaurant = async (dispatch: Dispatch, id: string) => {
+    try {
+        dispatch(fetchStarted());
+        const { data } = await api.get(`/${id}`);
+        return dispatch(fetchSuccess(data));
+    } catch (error) {
+        return fetchError(error);
+    }
+}
+
 export default RestaurantSelected.reducer;

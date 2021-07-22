@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 
 import { Header } from './components'
-import { GlobalStyle } from './styles/Global'
+import { GlobalStyle } from './global/style'
 import { routes } from './routes'
 
 function App() {

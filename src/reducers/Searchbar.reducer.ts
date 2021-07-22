@@ -1,6 +1,6 @@
-import axios from 'axios'
 import { createSlice } from '@reduxjs/toolkit';
 import { Dispatch } from 'redux';
+import api from '../api';
 
 const SearchReducer = createSlice({
     initialState: {
@@ -8,7 +8,6 @@ const SearchReducer = createSlice({
         loading: false,
         data: [],
         error: null,
-        success: false,
     },
     name: 'searchBar',
     reducers: {
@@ -20,7 +19,6 @@ const SearchReducer = createSlice({
         },
         fetchSuccess(state, action) {
             state.loading = false;
-            state.success = true;
             state.data = action.payload;
             state.error = null;
         },
@@ -28,21 +26,18 @@ const SearchReducer = createSlice({
             state.loading = false;
             state.data = [];
             state.error = action.payload;
-            state.success = false;
         }
     }
 })
 
 const { fetchError, fetchStarted, fetchSuccess } = SearchReducer.actions;
 
-export const fetchRestaurants = async (dispatch: Dispatch) =>{
-    const baseUrl = 'http://challange.goomer.com.br';
-
+export const fetchRestaurants = async (dispatch: Dispatch) => {
     try {
         dispatch(fetchStarted());
-        const { data } = await axios.get(`${baseUrl}/restaurants`)
+        const { data } = await api.get('');
         return dispatch(fetchSuccess(data));
-    } catch( error ) {
+    } catch (error) {
         return dispatch(fetchError(error))
     }
 }

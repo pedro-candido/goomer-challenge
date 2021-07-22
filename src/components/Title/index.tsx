@@ -1,13 +1,13 @@
-import StyledTitle from './style'
+import { StyledTitle, TitleContainer } from './style';
 
-interface TitleProps {
-    text: string
-}
+import { TitleProps } from '../../global/types'
 
-export const Title = ({text}: TitleProps) => {
+export const Title = ({text, isHome}: TitleProps) => {
     return (
         <>
-            <StyledTitle>{text}</StyledTitle>
+            <TitleContainer isHome={isHome}>
+                <StyledTitle>{text}</StyledTitle>
+            </TitleContainer>
         </>
     )
 }

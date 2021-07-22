@@ -1,26 +1,19 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { Card } from '../'
-import { RestaurantsContainer } from './style'
-import { IHours } from '../Card'
+import { Card } from '../';
+import { RestaurantsContainer } from './style';
 
-import { RootState } from '../../store/configureStore.store'
+import { RootState } from '../../store/configureStore.store';
 
-import { fetchRestaurants } from '../../reducers/Searchbar.reducer'
+import { fetchRestaurants } from '../../reducers/Searchbar.reducer';
 
-interface IRestaurant {
-    id: number,
-    name: string,
-    address: string,
-    image: string,
-    hours: Array<IHours>
-}
+import { IRestaurant } from '../../global/types';
 
 export const Restaurants = () => {
     const { SearchReducer } = useSelector((state: RootState) => state);
-    const { value: inputValue  } = SearchReducer
+    const { value: inputValue  } = SearchReducer;
     const { data } = useSelector((state: RootState) => state.SearchReducer);
 
     const [ restaurants, setRestaurants ] = useState<IRestaurant[]>([]);
@@ -30,7 +23,7 @@ export const Restaurants = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetchRestaurants(dispatch)
+        fetchRestaurants(dispatch);
     }, [dispatch])
 
     useEffect(() => {
@@ -47,19 +40,18 @@ export const Restaurants = () => {
 
         const handleInputChange = () => {
             if (inputValue === '') {
-                setRestaurantsToRender(restaurants)
+                setRestaurantsToRender(restaurants);
             } else {
-                const filteredRestaurants = restaurants.filter(restaurant => compareStrings(restaurant.name, inputValue) === true)
-                setRestaurantsToRender(filteredRestaurants)
+                const filteredRestaurants = restaurants.filter(restaurant => compareStrings(restaurant.name, inputValue) === true);
+                setRestaurantsToRender(filteredRestaurants);
             }
         }
 
         handleInputChange();
-    },[inputValue, restaurants])
+    }, [inputValue, restaurants])
 
     const handleClick = (index: number) => {
-        // useParams
-        history.push('/restaurants')
+        history.push(`/restaurant/${index}`);
     }
 
     return (

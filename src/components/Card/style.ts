@@ -45,8 +45,8 @@ export const CardImage = styles.div`
 export const Disponibility = styles.div<{isOpen: boolean}>`
     background-color: ${({isOpen}) => isOpen ? '#2B0D61' : '#B5ABD4'};
     font-size: 8px;
-    min-width: 38px;
-    min-height: 38px;
+    width: 45px;
+    height: 45px;
     padding: 5px;
     font-weight: bold;
     color: #fff;
