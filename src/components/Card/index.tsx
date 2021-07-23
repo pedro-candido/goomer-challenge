@@ -30,6 +30,7 @@ export const Card = ({ restaurant, ...rest }: ICard) => {
                 if (days.includes(timeNow.day) && timeNow.hour >= Number(openHour) && timeNow.hour < Number(closeHour)) {
                     return setIsOpen(true);
                 }
+                
                 if (timeNow.day === 1) timeNow.day = 8;
                 if (openHour > closeHour && days.includes(timeNow.day - 1)) {
                     debugger;

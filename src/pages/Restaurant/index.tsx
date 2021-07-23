@@ -11,7 +11,7 @@ import { ParamProps, IRestaurant } from '../../global/types'
 
 
 export const Restaurant = () => {
-    const restaurant = useSelector((state: RootState) => state.RestaurantSelected.data) as IRestaurant
+    const { name } = useSelector((state: RootState) => state.RestaurantSelected.data) as IRestaurant
     const dispatch = useDispatch();
     const { id } = useParams<ParamProps>();
 
@@ -24,7 +24,7 @@ export const Restaurant = () => {
             <RestaurantHeader />
             <Title
                 isHome={false}
-                text={restaurant.name}
+                text={name}
             />
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
         </>
