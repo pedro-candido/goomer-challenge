@@ -21,30 +21,31 @@ export const Card = ({ restaurant, ...rest }: ICard) => {
     }, 10000)
 
     useEffect(() => {
-        const compareTime = (hours: Array<IHours>) => {            
-            !hours && setIsOpen(false);
-            let tmp = hours.map(({ days, from, to }) => {
-                let openHour = Number(from.split(':')[0]);
-                let closeHour = Number(to.split(':')[0]);
-                if (days.includes(timeNow.day) && timeNow.hour >= openHour && timeNow.hour < closeHour) {
-                    return true;
+        const compareTime = (hours: Array<IHours>) => {
+            console.log(hours);
+            hours.map(({ days, from, to }) => {
+                const openHour = Number(from.split(':')[0]);
+                const closeHour = Number(to.split(':')[0]);
+
+                if (days.includes(timeNow.day) && timeNow.hour >= Number(openHour) && timeNow.hour < Number(closeHour)) {
+                    return setIsOpen(true);
                 }
+                if (timeNow.day === 1) timeNow.day = 8;
                 if (openHour > closeHour && days.includes(timeNow.day - 1)) {
-                    if (timeNow.hour >= openHour || timeNow.hour < closeHour){
-                        return true;
+                    debugger;
+                    if (timeNow.hour >= openHour || timeNow.hour < closeHour) {
+                        return setIsOpen(true);
                     }
                 }
-                return false;
-            });
-
-            return tmp
+            })
         }
-        restaurant.hours && compareTime(restaurant.hours)
-    }, [timeNow, restaurant.hours])
+        if (restaurant.hours)
+            compareTime(restaurant.hours);
+    }, [timeNow, restaurant.hours, isOpen])
 
     return (
         <CardContainer {...rest}>
-            { cardMemoized }
+            {cardMemoized}
             <CardData>
                 <h2>{restaurant.name}</h2>
                 <p>{restaurant.address}</p>
