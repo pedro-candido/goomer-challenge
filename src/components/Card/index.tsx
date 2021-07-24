@@ -1,5 +1,5 @@
 import { CardContainer, CardData, CardImage, Disponibility } from './style'
-import { useState, useEffect, useMemo, HTMLAttributes } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { getDay, getHours } from 'date-fns'
 
 import { ICard, IHours } from '../../global/types'
@@ -22,7 +22,6 @@ export const Card = ({ restaurant, ...rest }: ICard) => {
 
     useEffect(() => {
         const compareTime = (hours: Array<IHours>) => {
-            console.log(hours);
             hours.map(({ days, from, to }) => {
                 const openHour = Number(from.split(':')[0]);
                 const closeHour = Number(to.split(':')[0]);
@@ -33,11 +32,12 @@ export const Card = ({ restaurant, ...rest }: ICard) => {
                 
                 if (timeNow.day === 1) timeNow.day = 8;
                 if (openHour > closeHour && days.includes(timeNow.day - 1)) {
-                    debugger;
                     if (timeNow.hour >= openHour || timeNow.hour < closeHour) {
                         return setIsOpen(true);
                     }
                 }
+
+                return setIsOpen(false);
             })
         }
         if (restaurant.hours)

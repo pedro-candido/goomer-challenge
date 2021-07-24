@@ -5,4 +5,6 @@ export { Searchbar } from './Searchbar';
 export { Restaurants } from './Restaurants'; 
 export { RestaurantHeader } from './RestaurantHeader';  
 export { RestaurantHours } from './RestaurantHours';  
-export { Collapsible } from './Collapsible';  
+export { Collapsible } from './Collapsible';
+export { Food } from './Food';
+export { Loader } from './Loader'

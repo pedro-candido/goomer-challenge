@@ -1,8 +1,10 @@
 import { BrowserRouter } from 'react-router-dom'
-
 import { Header } from './components'
 import { GlobalStyle, MainContainer } from './global/style'
 import { routes } from './routes'
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (

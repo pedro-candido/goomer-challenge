@@ -14,6 +14,7 @@ import { IRestaurant } from '../../global/types';
 export const Restaurants = () => {
     const { SearchReducer } = useSelector((state: RootState) => state);
     const { value: inputValue  } = SearchReducer;
+    
     const { data } = useSelector((state: RootState) => state.SearchReducer);
 
     const [ restaurants, setRestaurants ] = useState<IRestaurant[]>([]);

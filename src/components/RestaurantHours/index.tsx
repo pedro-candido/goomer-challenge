@@ -1,42 +1,32 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+// import { useSelector } from 'react-redux'
 
-import { RootState } from '../../store/configureStore.store';
+// import { RootState } from '../../store/configureStore.store';
 
-import { IRestaurant } from '../../global/types'
+// import { IRestaurant } from '../../global/types'
 
 export const RestaurantHours = () => {
-    const { hours } = useSelector((state: RootState) => state.RestaurantSelected.data) as IRestaurant
-    const [filteredDays, setFilteredDays] = useState<string[]>()
-    let firstDayFiltered: string[];
-    const daysName = [
-        'Domingo',
-        'Segunda',
-        'Terça',
-        'Quarta',
-        'Quinta',
-        'Sexta',
-        'Sábado',
-    ]
-    let firstDay: number[] = [];
-    let lastDay: number[] = [];
-    let daysInterval = []
+    // const { hours } = useSelector((state: RootState) => state.RestaurantSelected.data) as IRestaurant
+    // const daysName = [
+    //     'Domingo',
+    //     'Segunda',
+    //     'Terça',
+    //     'Quarta',
+    //     'Quinta',
+    //     'Sexta',
+    //     'Sábado',
+    // ]
+    // let firstDay: number[] = [];
+    // let lastDay: number[] = [];
 
-    hours && hours.map((item) => {
-        item.days.map((day, index) => {
-            if(index === 0) 
-                firstDay.push(day-1);
+    // hours && hours.map((item) => {
+    //     item.days.map((day, index) => {
+    //         if(index === 0) 
+    //             firstDay.push(day-1);
 
-            if(index === item.days.length-1) 
-                lastDay.push(day-1);
-        })
-    })
-    
-
-    useLayoutEffect(() => {
-        setFilteredDays(daysName.filter((day, index) => index === firstDay[index]))
-    }, [])
-
+    //         if(index === item.days.length-1) 
+    //             lastDay.push(day-1);
+    //     })
+    // })
     return (
         <>
             <p>Segunda à Sexta: 11:30 às 15:00</p>

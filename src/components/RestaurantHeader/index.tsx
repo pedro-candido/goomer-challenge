@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
-import { ParamProps,  IRestaurant } from '../../global/types'
-import { RestaurantHours, Title } from '../index'
+import { ParamProps, IRestaurant } from '../../global/types'
+import { RestaurantHours, Title, Loader } from '../index'
 import { Image, HeaderWrapper, HeaderDescriptionWrapper } from './style'
 import { fetchRestaurant } from '../../reducers/RestaurantSelected.reducer';
 import { RootState } from '../../store/configureStore.store';
@@ -11,17 +11,25 @@ import { RootState } from '../../store/configureStore.store';
 
 export const RestaurantHeader = () => {
     const { name, image } = useSelector((state: RootState) => state.RestaurantSelected.data) as IRestaurant;
+    const isLoading = useSelector((state: RootState) => state.RestaurantSelected.loading);
+    const [loading, setLoading] = useState(isLoading);
     const { id } = useParams<ParamProps>();
 
     const dispatch = useDispatch();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         fetchRestaurant(dispatch, id);
-    }, [id])
+    }, [dispatch, id])
 
     return (
+        
         <HeaderDescriptionWrapper>
-            <Image src={image} />
+        <link rel="preload" as="image" href={image} />
+
+            <Image
+                srcSet={`${image} 100px`}
+                src={image} />
+
 
             <HeaderWrapper>
                 <Title
@@ -32,6 +40,8 @@ export const RestaurantHeader = () => {
 
                 <RestaurantHours />
             </HeaderWrapper>
+
+
         </HeaderDescriptionWrapper>
     )
 }
