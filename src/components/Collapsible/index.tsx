@@ -5,28 +5,68 @@ import { FiChevronDown, FiChevronRight } from 'react-icons/fi';
 import { useParams } from 'react-router-dom'
 
 import { fetchMenu } from '../../reducers/RestaurantMenu.reducer'
-import { FoodContainer } from './style';
+import { FoodGroup } from './style';
 import { RootState } from '../../store/configureStore.store'
 import { FoodProps, ParamProps } from '../../global/types'
 
+interface isOpen {
+    id: number
+    value: false
+}
+
 export const Collapsible = () => {
     const { data } = useSelector((state: RootState) => state.RestaurantMenu);
-    const [isOpen, setIsOpen] = useState(false);
     const dispatch = useDispatch();
-    const [food, setFood] = useState<FoodProps>();
-    const { id } = useParams<ParamProps>()
+    const { id } = useParams<ParamProps>();
+    let foodGroups: string[] = []
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchMenu(dispatch, id)
-        data && setFood(data)
-    }, [data])
+    }, [dispatch, id])
 
-    const handleClick = (foodName: string) => {
-        setIsOpen(!isOpen)
+    const handleClick = (foodGroup: number) => {
+        console.log(foodGroup)
+        console.log(isOpen);
+        let valueToChange = isOpen.filter((item, index) => foodGroup === item.id);
+        console.log(valueToChange);
     };
+
+    data.map((item, index) => {
+        !foodGroups.includes(item.group) && foodGroups.push(item.group);
+    })
+
+    const filteredFoods = (foodGroup: string) => {
+        return data.filter(item => item.group === foodGroup)
+    }
+
+    let [isOpen, setIsOpen] = useState<isOpen[]>(Array(foodGroups.length));
+
 
     return (
         <>
+            <ul>
+                {foodGroups.map((group, groupIndex) => {
+                    return (
+                        <div key={groupIndex}>
+                            <FoodGroup onClick={() => handleClick(groupIndex)}>
+                                <h3>{group}</h3>
+                                <FiChevronRight />
+                            </FoodGroup>
+
+                            {
+                                filteredFoods(group).map((item, index) => {
+                                    return (
+                                        <Collapse key={index} in={false}>
+                                            <p>{item.name}</p>
+                                        </Collapse>
+                                    )
+                                })
+                            }
+                        </div>
+
+                    )
+                })}
+            </ul>
         </>
     )
 }

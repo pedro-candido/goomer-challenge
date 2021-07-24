@@ -24,10 +24,7 @@ export const RestaurantHeader = () => {
     return (
         
         <HeaderDescriptionWrapper>
-        <link rel="preload" as="image" href={image} />
-
             <Image
-                srcSet={`${image} 100px`}
                 src={image} />
 
 

@@ -9,13 +9,13 @@ import api from '../api';
 const RestaurantMenu = createSlice({
     initialState: {
         loading: false,
-        data: {} as FoodProps | {} | undefined,
+        data: [] as FoodProps[],
         error: null
     },
     name: 'restaurantMenu',
     reducers: {
         fetchStarted(state){
-            state.data = {};
+            state.data = [];
             state.loading = true;
         },
         fetchSuccess(state, action){
@@ -25,7 +25,7 @@ const RestaurantMenu = createSlice({
         },
         fetchError(state, action){
             state.loading = false;
-            state.data = {};
+            state.data = [];
             state.error = action.payload;
         }
     }
