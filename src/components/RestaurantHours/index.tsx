@@ -1,3 +1,4 @@
+import { useEffect, useLayoutEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import { RootState } from '../../store/configureStore.store';
@@ -6,6 +7,8 @@ import { IRestaurant } from '../../global/types'
 
 export const RestaurantHours = () => {
     const { hours } = useSelector((state: RootState) => state.RestaurantSelected.data) as IRestaurant
+    const [filteredDays, setFilteredDays] = useState<string[]>()
+    let firstDayFiltered: string[];
     const daysName = [
         'Domingo',
         'Segunda',
@@ -28,18 +31,17 @@ export const RestaurantHours = () => {
                 lastDay.push(day-1);
         })
     })
+    
 
-    let firstDayFiltered = daysName.filter((day, index) => index === firstDay[index])
-
-    console.log(firstDayFiltered)
+    useLayoutEffect(() => {
+        setFilteredDays(daysName.filter((day, index) => index === firstDay[index]))
+    }, [])
 
     return (
         <>
-            {firstDayFiltered.map(item => {
-                return (
-                    <p>{ item }</p>
-                )
-            })}
+            <p>Segunda à Sexta: 11:30 às 15:00</p>
+            <p>Sábados: 11:30 às 22:00</p>
+            <p>Domingos e Feriados: 11:30 às 15:00</p>
         </>
     )
 }

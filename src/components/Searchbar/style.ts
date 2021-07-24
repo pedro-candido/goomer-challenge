@@ -21,7 +21,7 @@ export const InputWrapper = styles('div')`
     display: flex;
     justify-content: center;
     width: 50%;
-    margin: auto;
+    margin: 0 auto 1% auto;
     position:relative;
 `
 

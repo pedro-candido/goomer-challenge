@@ -2,7 +2,6 @@ import styles from 'styled-components'
 
 export const CardContainer = styles.div`
     @media(min-width: 992px){
-        max-height: 100px;
         max-width: 365px;
         display: flex;
         flex-direction: row;
@@ -26,10 +25,20 @@ export const CardData = styles.div`
         padding: 15px;
         width: 267px;
         h2{
-            font-size: 16px;
+            font-size: 18px;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
         }
         p {
-            font-size: 12px;
+            font-size: 14px;
+            text-overflow: ellipsis;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            display: -webkit-box;
         }
     }
 `

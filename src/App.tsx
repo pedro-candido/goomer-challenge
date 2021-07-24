@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 
 import { Header } from './components'
-import { GlobalStyle } from './global/style'
+import { GlobalStyle, MainContainer } from './global/style'
 import { routes } from './routes'
 
 function App() {
@@ -10,7 +10,9 @@ function App() {
       <BrowserRouter>
         <GlobalStyle />
         <Header />
-        { routes }
+        <MainContainer>
+          { routes }
+        </MainContainer>
       </BrowserRouter>
     </div>
   );
