@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -13,11 +13,6 @@ export const RestaurantHeader = () => {
     (state: RootState) => state.RestaurantSelected.data
   ) as IRestaurant;
 
-  const isLoading = useSelector(
-    (state: RootState) => state.RestaurantSelected.loading
-  );
-
-  const [loading, setLoading] = useState(isLoading);
   const { id } = useParams<ParamProps>();
 
   const dispatch = useDispatch();

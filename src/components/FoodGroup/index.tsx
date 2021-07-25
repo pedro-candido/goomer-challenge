@@ -7,8 +7,6 @@ import { FoodGroupStyle } from "./style";
 
 import { RootState } from "../../store/configureStore.store";
 
-import { FoodCard } from "../index";
-
 interface IFoodGroupProps {
   group: string;
 }
