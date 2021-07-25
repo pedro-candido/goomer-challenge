@@ -13,6 +13,18 @@
   <img src="https://i.imgur.com/PEOn46y.png" alt="Logo ConvertApp" width="200"/>
 </p>
 
+### O que foi feito?
+- [x] Página inicial
+- [x] Redux Implementado
+- [x] Rotas
+- [x] Bootstrap adicionado
+- [x] Redux Toolkit
+- [x] Busca por nome do restaurante
+- [x] Conversão de dia e hora
+- [ ] Página do restaurante
+- [ ] Adição de produtos no carrinho
+- [ ] Responsividade
+
 ### ❔ Para que serve?
 - O **Goomer Challenge** é um app de delivery de comida 🍕
 
