@@ -14,16 +14,16 @@ const RestaurantMenu = createSlice({
     },
     name: 'restaurantMenu',
     reducers: {
-        fetchStarted(state){
+        fetchStarted(state) {
             state.data = [];
             state.loading = true;
         },
-        fetchSuccess(state, action){
+        fetchSuccess(state, action) {
             state.loading = false;
             state.data = action.payload;
             state.error = null;
         },
-        fetchError(state, action){
+        fetchError(state, action) {
             state.loading = false;
             state.data = [];
             state.error = action.payload;
@@ -33,7 +33,7 @@ const RestaurantMenu = createSlice({
 
 const { fetchStarted, fetchSuccess, fetchError } = RestaurantMenu.actions;
 
-export const fetchMenu = async ( dispatch: Dispatch, id: string ) => {
+export const fetchMenu = async (dispatch: Dispatch, id: string) => {
     try {
         dispatch(fetchStarted());
         const { data } = await api.get(`/${id}/menu`);

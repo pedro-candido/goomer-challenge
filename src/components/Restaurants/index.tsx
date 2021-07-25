@@ -1,71 +1,75 @@
-import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-import { Card } from '../';
-import { RestaurantsContainer } from './style';
+import { Card } from "../";
+import { RestaurantsContainer } from "./style";
 
-import { RootState } from '../../store/configureStore.store';
+import { RootState } from "../../store/configureStore.store";
 
-import { fetchRestaurants } from '../../reducers/Searchbar.reducer';
+import { fetchRestaurants } from "../../reducers/Searchbar.reducer";
 
-import { IRestaurant } from '../../global/types';
+import { IRestaurant } from "../../global/types";
 
 export const Restaurants = () => {
-    const { SearchReducer } = useSelector((state: RootState) => state);
-    const { value: inputValue  } = SearchReducer;
-    
-    const { data } = useSelector((state: RootState) => state.SearchReducer);
+  const { SearchReducer } = useSelector((state: RootState) => state);
+  const { value: inputValue } = SearchReducer;
 
-    const [ restaurants, setRestaurants ] = useState<IRestaurant[]>([]);
-    const [ restaurantsToRender, setRestaurantsToRender ] = useState<IRestaurant[]>([]);
+  const { data } = useSelector((state: RootState) => state.SearchReducer);
 
-    const history = useHistory();
-    const dispatch = useDispatch();
+  const [restaurants, setRestaurants] = useState<IRestaurant[]>([]);
+  const [restaurantsToRender, setRestaurantsToRender] = useState<IRestaurant[]>(
+    []
+  );
 
-    useEffect(() => {
-        fetchRestaurants(dispatch);
-    }, [dispatch])
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        setRestaurants(data);
-    }, [data])
+  useEffect(() => {
+    fetchRestaurants(dispatch);
+  }, [dispatch]);
 
-    useEffect(()=> {
-        const compareStrings = (firstString: string, secondString: string) =>{
-            const firstStringCapitalized = firstString.toLowerCase();
-            const secondStringCapitalized = secondString.toLowerCase();
+  useEffect(() => {
+    setRestaurants(data);
+  }, [data]);
 
-            return firstStringCapitalized.includes(secondStringCapitalized);
-        }
+  useEffect(() => {
+    const compareStrings = (firstString: string, secondString: string) => {
+      const firstStringCapitalized = firstString.toLowerCase();
+      const secondStringCapitalized = secondString.toLowerCase();
 
-        const handleInputChange = () => {
-            if (inputValue === '') {
-                setRestaurantsToRender(restaurants);
-            } else {
-                const filteredRestaurants = restaurants.filter(restaurant => compareStrings(restaurant.name, inputValue) === true);
-                setRestaurantsToRender(filteredRestaurants);
-            }
-        }
+      return firstStringCapitalized.includes(secondStringCapitalized);
+    };
 
-        handleInputChange();
-    }, [inputValue, restaurants])
+    const handleInputChange = () => {
+      if (inputValue === "") {
+        setRestaurantsToRender(restaurants);
+      } else {
+        const filteredRestaurants = restaurants.filter(
+          (restaurant) => compareStrings(restaurant.name, inputValue) === true
+        );
+        setRestaurantsToRender(filteredRestaurants);
+      }
+    };
 
-    const handleClick = (index: number) => {
-        history.push(`/restaurant/${index}`);
-    }
+    handleInputChange();
+  }, [inputValue, restaurants]);
 
-    return (
-        <RestaurantsContainer>
-            {restaurantsToRender.map((item) => {
-                return (
-                        <Card
-                            onClick={() => handleClick(item.id)}
-                            key={item.id}
-                            restaurant={item}
-                        />
-                )
-            })}
-        </RestaurantsContainer>
-    )
-}
+  const handleClick = (index: number) => {
+    history.push(`/restaurant/${index}`);
+  };
+
+  return (
+    <RestaurantsContainer>
+      {restaurantsToRender.map((item) => {
+        return (
+          <Card
+            onClick={() => handleClick(item.id)}
+            key={item.id}
+            restaurant={item}
+          />
+        );
+      })}
+    </RestaurantsContainer>
+  );
+};

@@ -1,10 +1,9 @@
-import { BrowserRouter } from 'react-router-dom'
-import { Header } from './components'
-import { GlobalStyle, MainContainer } from './global/style'
-import { routes } from './routes'
+import { BrowserRouter } from "react-router-dom";
+import { Header } from "./components";
+import { GlobalStyle, MainContainer } from "./global/style";
+import { routes } from "./routes";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
@@ -12,9 +11,7 @@ function App() {
       <BrowserRouter>
         <GlobalStyle />
         <Header />
-        <MainContainer>
-          { routes }
-        </MainContainer>
+        <MainContainer>{routes}</MainContainer>
       </BrowserRouter>
     </div>
   );

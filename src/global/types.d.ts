@@ -40,10 +40,10 @@ export interface FoodProps {
     "price": number,
     "group": string,
     "sales": [
-      {
-        "description": string,
-        "price": number,
-        "hours": Array<IHours>
-      }
+        {
+            "description": string,
+            "price": number,
+            "hours": Array<IHours>
+        }
     ]
 }

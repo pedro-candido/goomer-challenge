@@ -1,44 +1,41 @@
-import { useLayoutEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useLayoutEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
-import { ParamProps, IRestaurant } from '../../global/types'
-import { RestaurantHours, Title, Loader } from '../index'
-import { Image, HeaderWrapper, HeaderDescriptionWrapper } from './style'
-import { fetchRestaurant } from '../../reducers/RestaurantSelected.reducer';
-import { RootState } from '../../store/configureStore.store';
-
+import { ParamProps, IRestaurant } from "../../global/types";
+import { Title, RestaurantHours } from "../index";
+import { Image, HeaderWrapper, HeaderDescriptionWrapper } from "./style";
+import { fetchRestaurant } from "../../reducers/RestaurantSelected.reducer";
+import { RootState } from "../../store/configureStore.store";
 
 export const RestaurantHeader = () => {
-    const { name, image } = useSelector((state: RootState) => state.RestaurantSelected.data) as IRestaurant;
-    const isLoading = useSelector((state: RootState) => state.RestaurantSelected.loading);
-    const [loading, setLoading] = useState(isLoading);
-    const { id } = useParams<ParamProps>();
+  const { name, image } = useSelector(
+    (state: RootState) => state.RestaurantSelected.data
+  ) as IRestaurant;
 
-    const dispatch = useDispatch();
+  const isLoading = useSelector(
+    (state: RootState) => state.RestaurantSelected.loading
+  );
 
-    useLayoutEffect(() => {
-        fetchRestaurant(dispatch, id);
-    }, [dispatch, id])
+  const [loading, setLoading] = useState(isLoading);
+  const { id } = useParams<ParamProps>();
 
-    return (
-        
-        <HeaderDescriptionWrapper>
-            <Image
-                src={image} />
+  const dispatch = useDispatch();
 
+  useLayoutEffect(() => {
+    fetchRestaurant(dispatch, id);
+  }, [dispatch, id]);
 
-            <HeaderWrapper>
-                <Title
-                    isHome={false}
-                    text={name}
-                />
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+  return (
+    <HeaderDescriptionWrapper>
+      <Image src={image} />
 
-                <RestaurantHours />
-            </HeaderWrapper>
+      <HeaderWrapper>
+        <Title isHome={false} text={name} />
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
 
-
-        </HeaderDescriptionWrapper>
-    )
-}
+        <RestaurantHours />
+      </HeaderWrapper>
+    </HeaderDescriptionWrapper>
+  );
+};
